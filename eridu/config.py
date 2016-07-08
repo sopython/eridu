@@ -21,3 +21,4 @@ ANSWERS_SORT = os.environ.get('ERIDU_ANSWERS_SORT', 'creation')
 ANSWERS_ORDER = os.environ.get('ERIDU_ANSWERS_ORDER', 'asc')
 
 FILTER_TAGS = os.environ.get('ERIDU_FILTER_TAGS', 'python,python-2.x,python-3.x')
+SECONDS_BETWEEN_REQUESTS = os.environ.get('ERIDU_SECONDS_BETWEEN_REQUESTS', 300)

@@ -6,7 +6,7 @@ import click
 import schedule
 
 from eridu.logger import logger
-from eridu.config import FILTER_TAGS
+from eridu.config import FILTER_TAGS, SECONDS_BETWEEN_REQUESTS
 from eridu.core import get_post_ids, split_post_ids, get_questions, get_answers, filter_posts_by_tag
 
 @click.command()
@@ -50,7 +50,7 @@ def main(start):
         params['page'] += 1
 
 
-    schedule.every(5).seconds.do(run, params=params)
+    schedule.every(SECONDS_BETWEEN_REQUESTS).seconds.do(run, params=params)
 
     while True:
         schedule.run_pending()
