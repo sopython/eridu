@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 
+import json
 import time
 
 import click
 import schedule
+import pika
 
 from eridu.logger import logger
 from eridu.config import FILTER_TAGS, SECONDS_BETWEEN_REQUESTS
+from eridu.config import QUEUE_HOST, QUEUE_PORT, EXCHANGE, QUESTIONS_ROUTING_KEY, ANSWERS_ROUTING_KEY
 from eridu.core import get_post_ids, split_post_ids, get_questions, get_answers, filter_posts_by_tag
 
 @click.command()
@@ -27,26 +30,39 @@ def main(start):
         page = params.get('page')
         logger.info('Getting posts for page {}.'.format(page))
 
+        connection = pika.BlockingConnection(pika.ConnectionParameters(
+            host=QUEUE_HOST,
+            port=QUEUE_PORT)
+        )
+        channel = connection.channel()
+
+        channel.exchange_declare(exchange=EXCHANGE,
+                                 type='topic')
+
         post_ids = get_post_ids(page)
         ids = split_post_ids(post_ids['items'])
 
         questions = get_questions(ids['question_ids'])
         questions = filter_posts_by_tag(questions['items'], tags)
-        for question in questions:
-            try:
-                print(question)
-            except UnicodeEncodeError:
-                pass
 
-        print('\n\n')
+        routing_key = QUESTIONS_ROUTING_KEY
+        for question in questions:
+            message = json.dumps(question)
+            channel.basic_publish(exchange=EXCHANGE,
+                                  routing_key=routing_key,
+                                  body=message)
 
         answers = get_answers(ids['answer_ids'])
         answers = filter_posts_by_tag(answers['items'], tags)
+
+        routing_key = ANSWERS_ROUTING_KEY
         for answer in answers:
-            try:
-                print(answer)
-            except UnicodeEncodeError:
-                pass
+            message = json.dumps(answer)
+            channel.basic_publish(exchange=EXCHANGE,
+                                  routing_key=routing_key,
+                                  body=message)
+
+        connection.close()
 
         params['page'] += 1
 

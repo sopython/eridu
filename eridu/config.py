@@ -22,3 +22,9 @@ ANSWERS_ORDER = os.environ.get('ERIDU_ANSWERS_ORDER', 'asc')
 
 FILTER_TAGS = os.environ.get('ERIDU_FILTER_TAGS', 'python,python-2.x,python-3.x')
 SECONDS_BETWEEN_REQUESTS = int(os.environ.get('ERIDU_SECONDS_BETWEEN_REQUESTS', 300))
+
+QUEUE_HOST = os.environ.get('ERIDU_RABBITMQ_HOST', 'docker.local')
+QUEUE_PORT = int(os.environ.get('ERIDU_RABBITMQ_PORT', 32769))
+EXCHANGE = os.environ.get('ERIDU_RABBITMQ_EXCHANGE', 'eridu')
+QUESTIONS_ROUTING_KEY = os.environ.get('ERIDU_RABBITMQ_QUESTIONS_ROUTING_KEY', 'posts.historical.questions')
+ANSWERS_ROUTING_KEY = os.environ.get('ERIDU_RABBITMQ_ANSWERS_ROUTING_KEY', 'posts.historical.answers')
