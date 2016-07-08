@@ -31,7 +31,7 @@ def get_questions(question_ids, url=QUESTIONS_URL, filter=QUESTIONS_FILTER, acce
     if data.get('backoff') is not None:
         time.sleep(int(data.get('backoff')))
 
-    return data['items']
+    return data
 
 def get_answers(answer_ids, url=ANSWERS_URL, filter=ANSWERS_FILTER, access_key=ACCESS_KEY, site=SITE, sort=ANSWERS_SORT, order=ANSWERS_ORDER):
     url = url.format(';'.join([str(i) for i in answer_ids]))
@@ -55,7 +55,7 @@ def get_answers(answer_ids, url=ANSWERS_URL, filter=ANSWERS_FILTER, access_key=A
 
     questions = get_questions(question_ids)
 
-    tags = {question['question_id']: question['tags'] for question in questions}
+    tags = {question['question_id']: question['tags'] for question in questions['items']}
 
     for answer in data['items']:
         answer['tags'] = tags[answer['question_id']]
@@ -63,7 +63,7 @@ def get_answers(answer_ids, url=ANSWERS_URL, filter=ANSWERS_FILTER, access_key=A
     if data.get('backoff') is not None:
         time.sleep(int(data.get('backoff')))
 
-    return data['items']
+    return data
 
 
 def get_post_ids(page, url=POST_IDS_URL, filter=POST_IDS_FILTER, n_posts=POST_IDS_NUMBER, access_key=ACCESS_KEY, site=SITE, sort=POST_IDS_SORT, order=POST_IDS_ORDER):
@@ -85,7 +85,7 @@ def get_post_ids(page, url=POST_IDS_URL, filter=POST_IDS_FILTER, n_posts=POST_ID
     if data.get('backoff') is not None:
         time.sleep(int(data.get('backoff')))
 
-    return data['items']
+    return data
 
 
 def split_post_ids(post_ids):
