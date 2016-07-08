@@ -10,4 +10,5 @@ COPY . /usr/src/app
 
 RUN pip install .
 
-CMD ["python", "bin/run_eridu.py"]
+ENTRYPOINT ["python"]
+CMD ["bin/run_eridu.py"]

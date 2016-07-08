@@ -5,7 +5,7 @@ ACCESS_KEY = os.environ.get('STACKEXCHANGE_REQUESTS_KEY')
 SITE = os.environ.get('ERIDU_SITE', 'stackoverflow')
 
 POST_IDS_URL = "https://api.stackexchange.com/2.2/posts"
-POST_IDS_NUMBER = os.environ.get('ERIDU_POST_IDS_NUMBER', 100)
+POST_IDS_NUMBER = int(os.environ.get('ERIDU_POST_IDS_NUMBER', 100))
 POST_IDS_FILTER = os.environ.get('ERIDU_POST_IDS_FILTER', '!3tz1WbZW5IHcz*twZ')
 POST_IDS_SORT = os.environ.get('ERIDU_POST_IDS_SORT', 'creation')
 POST_IDS_ORDER = os.environ.get('ERIDU_POST_IDS_ORDER', 'asc')
