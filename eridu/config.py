@@ -19,3 +19,5 @@ ANSWERS_URL = "https://api.stackexchange.com/2.2/answers/{}"
 ANSWERS_FILTER = os.environ.get('ERIDU_ANSWERS_FILTER', '!Fcazzsr2b3Mo6cWaRk)J*C-n25')
 ANSWERS_SORT = os.environ.get('ERIDU_ANSWERS_SORT', 'creation')
 ANSWERS_ORDER = os.environ.get('ERIDU_ANSWERS_ORDER', 'asc')
+
+FILTER_TAGS = os.environ.get('ERIDU_FILTER_TAGS', 'python,python-2.x,python-3.x')
