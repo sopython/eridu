@@ -31,6 +31,8 @@ def get_questions(question_ids, url=QUESTIONS_URL, filter=QUESTIONS_FILTER, acce
     if data.get('backoff') is not None:
         time.sleep(int(data.get('backoff')))
 
+    logger.info('Remaining quota on /questions: {}'.format(data['quota_remaining']))
+
     return data
 
 def get_answers(answer_ids, url=ANSWERS_URL, filter=ANSWERS_FILTER, access_key=ACCESS_KEY, site=SITE, sort=ANSWERS_SORT, order=ANSWERS_ORDER):
@@ -63,6 +65,8 @@ def get_answers(answer_ids, url=ANSWERS_URL, filter=ANSWERS_FILTER, access_key=A
     if data.get('backoff') is not None:
         time.sleep(int(data.get('backoff')))
 
+    logger.info('Remaining quota on /answers: {}'.format(data['quota_remaining']))
+
     return data
 
 
@@ -84,6 +88,8 @@ def get_post_ids(page, url=POST_IDS_URL, filter=POST_IDS_FILTER, n_posts=POST_ID
 
     if data.get('backoff') is not None:
         time.sleep(int(data.get('backoff')))
+
+    logger.info('Remaining quota on /posts: {}'.format(data['quota_remaining']))
 
     return data
 
