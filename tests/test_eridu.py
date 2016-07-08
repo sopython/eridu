@@ -15,8 +15,6 @@ from contextlib import contextmanager
 from click.testing import CliRunner
 
 from eridu import eridu
-from eridu import cli
-
 
 
 class TestEridu(unittest.TestCase):
@@ -32,10 +30,8 @@ class TestEridu(unittest.TestCase):
 
     def test_command_line_interface(self):
         runner = CliRunner()
-        result = runner.invoke(cli.main)
         assert result.exit_code == 0
         assert 'eridu.cli.main' in result.output
-        help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
         assert '--help  Show this message and exit.' in help_result.output
 

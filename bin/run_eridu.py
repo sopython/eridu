@@ -21,6 +21,7 @@ def main(start):
 
     logger.info('Starting on page {}'.format(page))
     logger.info('Filtering to include the following tags: {}.'.format(tags))
+    logger.info('Getting requests every {} seconds.'.format(SECONDS_BETWEEN_REQUESTS))
 
     def run(params):
         page = params.get('page')
