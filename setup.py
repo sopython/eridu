@@ -20,7 +20,7 @@ test_requirements = [
 
 setup(
     name='sopython-eridu',
-    version='0.1.0',
+    version='0.2.0',
     description="Project Cradle library for accessing historic SO content.",
     long_description=readme + '\n\n' + history,
     author="Keiron J. Pizzey",

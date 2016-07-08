@@ -2,7 +2,7 @@
 
 __author__ = 'Keiron J. Pizzey'
 __email__ = 'kjpizzey@gmail.com'
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
 
 from eridu.core import get_post_ids, split_post_ids, get_questions, get_answers, filter_posts_by_tag
