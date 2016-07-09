@@ -1,0 +1,13 @@
+version: '2'
+services:
+  eridu:
+    build: .
+    environment:
+      ERIDU_SECONDS_BETWEEN_REQUESTS: 5
+    entrypoint: ./bin/wait-for-it.sh rabbitmq:5672 -- python bin/run_eridu.py
+    depends_on:
+     - rabbitmq
+  rabbitmq:
+    image: rabbitmq
+    ports:
+     - "5672:5672"
